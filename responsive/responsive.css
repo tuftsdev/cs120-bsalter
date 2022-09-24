@@ -1,0 +1,54 @@
+.homer {
+  background-image: url("homer.jpg");
+  position: absolute;
+  width: 333px;
+  height: 500px;
+}
+
+@media (max-width: 600px) {
+  .homer {
+    clip: rect(375px, 340px, 500px, 160px);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 700px) {
+  .homer {
+    clip: rect(375px, 170px, 500px, 0px);
+  }
+}
+
+@media (min-width: 701px) and (max-width: 800px) {
+  .homer {
+    clip: rect(250px, 340px, 375px, 167px);
+  }
+}
+
+@media (min-width: 801px) and (max-width: 900px) {
+  .homer {
+    clip: rect(250px, 165px, 370px, 0px);
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1000px) {
+  .homer {
+    clip: rect(125px, 340px, 250px, 167px);
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1100px) {
+  .homer {
+    clip: rect(125px, 165px, 250px, 0px);
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1200px) {
+  .homer {
+    clip: rect(0, 340px, 125px, 167px);
+  }
+}
+
+@media (min-width: 1201px) {
+  .homer {
+    clip: rect(0, 165px, 125px, 0px);
+  }
+}

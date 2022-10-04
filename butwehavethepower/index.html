@@ -17,6 +17,8 @@
     <div id="lyrics"></div>
 
     <script>
+      // musical notes image (notes.png) from https://pixabay.com/illustrations/note-music-clef-melody-freedom-1314941/
+      // Pixabay license: free commercial, no attribution required
       const lines = [
         "",
         "Lisa: Come gather round, children",
@@ -27,21 +29,104 @@
         "The girls and the fellas",
         "We'll fight 'till the death",
         "Or else fold like umbrellas",
-        "So we'll march day and night",
+        "Burns: full power, Smithers!",
+        "Baaaaa! D'waaaaaa whoa whoa whaaaa woah",
+        "Lisa: So we'll march day and night",
         "By the big cooling tower",
         "They have the plant",
         "But we have the power",
         "Lenny: Now do 'Classical Gas!'",
+        "<img src='notes.png' /><img src='notes.png' />",
+        "So we'll march day and night",
+        "Burns: Look at them all through the darkness I am bringing",
+        "They're not sad at all, they're actually singing!",
+        "They sing without juicers",
+        "They sing without blenders",
+        "They sing without flungers, clapdabblers and smendlers!",
+        "d'oooooh. Tell Simpson I'm ready to deal.",
       ];
 
       const video = document.querySelector("video");
       var currentLine = 0;
 
       video.addEventListener("timeupdate", () => {
-        const currentTime = Math.round(video.currentTime);
+        const currentTime = video.currentTime;
         switch (true) {
-          case currentTime > 5 && currentTime < 8:
+          case currentTime > 5.5 && currentTime < 8.5:
             currentLine = 1;
+            break;
+          case currentTime >= 8.5 && currentTime < 11:
+            currentLine = 2;
+            break;
+          case currentTime >= 11 && currentTime < 13:
+            currentLine = 3;
+            break;
+          case currentTime >= 13 && currentTime < 17:
+            currentLine = 4;
+            break;
+          case currentTime >= 17 && currentTime < 19:
+            currentLine = 5;
+            break;
+          case currentTime >= 19 && currentTime < 21:
+            currentLine = 6;
+            break;
+          case currentTime >= 21 && currentTime < 23:
+            currentLine = 7;
+            break;
+          case currentTime >= 23 && currentTime < 27:
+            currentLine = 8;
+            break;
+          case currentTime >= 28.5 && currentTime < 30.5:
+            currentLine = 9;
+            break;
+          case currentTime >= 32 && currentTime < 36:
+            currentLine = 10;
+            break;
+          case (currentTime >= 38 && currentTime < 40) ||
+            (currentTime >= 72.5 && currentTime < 75):
+            currentLine = 11;
+            break;
+          case (currentTime >= 40 && currentTime < 43) ||
+            (currentTime >= 75 && currentTime < 77.5) ||
+            (currentTime >= 84.5 && currentTime < 86.5):
+            currentLine = 12;
+            break;
+          case (currentTime >= 43 && currentTime < 45) ||
+            (currentTime >= 77.5 && currentTime < 79.5) ||
+            (currentTime >= 86.5 && currentTime < 88.5):
+            currentLine = 13;
+            break;
+          case (currentTime >= 45 && currentTime < 50) ||
+            (currentTime >= 79.5 && currentTime < 82) ||
+            (currentTime >= 88.5 && currentTime < 91):
+            currentLine = 14;
+            break;
+          case currentTime >= 52.5 && currentTime < 54.5:
+            currentLine = 15;
+            break;
+          case currentTime >= 55 && currentTime < 67:
+            currentLine = 16;
+            break;
+          case currentTime >= 82 && currentTime < 84.5:
+            currentLine = 17;
+            break;
+          case currentTime >= 91 && currentTime < 94:
+            currentLine = 18;
+            break;
+          case currentTime >= 94 && currentTime < 97:
+            currentLine = 19;
+            break;
+          case currentTime >= 98.5 && currentTime < 100:
+            currentLine = 20;
+            break;
+          case currentTime >= 101 && currentTime < 102.5:
+            currentLine = 21;
+            break;
+          case currentTime >= 104 && currentTime < 108:
+            currentLine = 22;
+            break;
+          case currentTime >= 108.5:
+            currentLine = 23;
             break;
           default:
             currentLine = 0;

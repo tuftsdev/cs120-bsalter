@@ -1,4 +1,5 @@
-let map, distance, storeMarker;
+let map, distance;
+let storeMarker = { lat: "", lng: "" };
 
 const loadMap = () => {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -22,7 +23,8 @@ const applyRideMarkers = (markerlocs, lat, lng) => {
     );
     if (testDistance < distance || !distance) {
       distance = testDistance;
-      storeMarker = marker;
+      storeMarker.lat = marker.lat;
+      storeMarker.lng = marker.lng;
     }
   });
 };
@@ -42,6 +44,17 @@ const applyCurrentLocationMarker = (lat, lng) => {
       map,
     });
   });
+  const coords = [
+    { lat, lng },
+    { lat: storeMarker.lat, lng: storeMarker.lng },
+  ];
+  const path = new google.maps.Polyline({
+    path: coords,
+    strokeColor: "blue",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+  path.setMap(map);
 };
 
 const loadMarkers = () => {

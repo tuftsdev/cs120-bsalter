@@ -10,11 +10,6 @@ const loadMap = () => {
 
 const applyRideMarkers = (markerlocs, lat, lng) => {
   markerlocs.forEach((marker) => {
-    new google.maps.Marker({
-      position: { lat: marker.lat, lng: marker.lng },
-      icon: "car.png",
-    }).setMap(map);
-
     const testDistance = Math.floor(
       google.maps.geometry.spherical.computeDistanceBetween(
         { lat, lng },
@@ -26,6 +21,24 @@ const applyRideMarkers = (markerlocs, lat, lng) => {
       storeMarker.lat = marker.lat;
       storeMarker.lng = marker.lng;
     }
+
+    const infowindow = new google.maps.InfoWindow({
+      content: testDistance.toString() + " miles away",
+    });
+
+    const rideMarker = new google.maps.Marker({
+      position: { lat: marker.lat, lng: marker.lng },
+      icon: "car.png",
+    });
+
+    rideMarker.addListener("click", () => {
+      infowindow.open({
+        anchor: rideMarker,
+        map,
+      });
+    });
+
+    rideMarker.setMap(map);
   });
 };
 
@@ -44,6 +57,7 @@ const applyCurrentLocationMarker = (lat, lng) => {
       map,
     });
   });
+
   const coords = [
     { lat, lng },
     { lat: storeMarker.lat, lng: storeMarker.lng },
@@ -54,6 +68,7 @@ const applyCurrentLocationMarker = (lat, lng) => {
     strokeOpacity: 1.0,
     strokeWeight: 2,
   });
+
   path.setMap(map);
 };
 
@@ -73,17 +88,20 @@ const loadMarkers = () => {
 
         const markerlocs = JSON.parse(http.responseText);
         applyRideMarkers(markerlocs, lat, lng);
-
         applyCurrentLocationMarker(lat, lng);
       }
     };
+
     http.send(params);
   });
 };
 
-const initMap = () => {
+const loadNearby = () => {
+  
+}
+
+window.initMap = () => {
   loadMap();
   loadMarkers();
+  loadNearby();
 };
-
-window.initMap = initMap;

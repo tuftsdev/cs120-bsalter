@@ -2,16 +2,18 @@
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="styles.min.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <meta charset="utf-8" />
     <title>Messages</title>
   </head>
   <body>
+    <!-- spinner code from: http://www.menucool.com/9499/CSS-loading-spinner-with-a-semi-transparent-background -->
+    <div id="cover-spin"></div>
     <div id="map"></div>
-    <script type="module" src="index.min.js"></script>
+    <script type="module" src="index.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhXJr5eCkwhUUWGi7t1Hpi8Uo8PRHkH64&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhXJr5eCkwhUUWGi7t1Hpi8Uo8PRHkH64&callback=initMap&v=weekly&libraries=geometry"
       defer
     ></script>
   </body>

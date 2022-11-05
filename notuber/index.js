@@ -76,9 +76,11 @@ const loadMarkers = () => {
   navigator.geolocation.getCurrentPosition((pos) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
+    const loc = new google.maps.LatLng(lat, lng);
+    map.setCenter(loc);
     const http = new XMLHttpRequest();
-    const url = "https://jordan-marsh.herokuapp.com/rides";
     const params = "username=DCEZBDzN&lat=" + lat + "&lng=" + lng;
+    const url = "https://vast-shore-91078.herokuapp.com/rides?" + params;
 
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -92,16 +94,11 @@ const loadMarkers = () => {
       }
     };
 
-    http.send(params);
+    http.send();
   });
 };
-
-const loadNearby = () => {
-  
-}
 
 window.initMap = () => {
   loadMap();
   loadMarkers();
-  loadNearby();
 };

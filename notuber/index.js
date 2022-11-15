@@ -80,7 +80,7 @@ const loadMarkers = () => {
     map.setCenter(loc);
     const http = new XMLHttpRequest();
     const params = "username=DCEZBDzN&lat=" + lat + "&lng=" + lng;
-    const url = "https://vast-shore-91078.herokuapp.com/rides?" + params;
+    const url = "https://vast-shore-91078.herokuapp.com/rides"
 
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -94,7 +94,7 @@ const loadMarkers = () => {
       }
     };
 
-    http.send();
+    http.send(params);
   });
 };
 

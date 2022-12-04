@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <title>Security Assessment</title>
     <style>
+        body {
+            margin-left: 20px;
+            margin-right: 50px;
+        }
         .privacy-image {
             width: 800px;
         }
@@ -31,9 +35,13 @@
         Subsequent to black-box testing, the primary mode of insepction is an in-depth, line-by-line code audit, 
         backed up by sending curl requests to verify findings. The code was deployed to a Heroku cloud server for testing.
     </p>
+    <p>Finally, the OWASP ZAP tool was used to determine if there are problems with headers that could expose the server.</p>
     <h1>Abstract of Findings</h1>
     <p>
-
+        Three very significant problems were found when investigating this back-end code, which could open the system to attack
+        and potentially your company to a lawsuit. In brief, it is currently possible for an attacker to damage your database,
+        download private passenger data, or 'fake' your site to steal your customer's data. We suggest remediating these problems 
+        immediately, as they are non-complex and could be rectified in under a day's typical work period.
     </p>
     <h1>Issues Found</h1>
     <ul>
@@ -41,15 +49,13 @@
             <ul>
                 <li>Issue: SQL Injection vulnerability</li>
                 <li>Location: line 90</li>
-                <li>Severity: Critical</li>
+                <li>Severity: Critical, arbitrary SQL can be run against the server</li>
                 <li>
                     Description: A SQL injection vulnerability exists in the GET vehicle.json endpoint which would allow
                     hackers to run their own SQL queries against the database. They could potentially use this to erase or
-                    alter records.
+                    alter records. Found this issue during code-audit and using the curl command.
                 </li>
-                <li>Proof: 
-
-                </li>
+                <li>Proof: <img src="sql.png" class="privacy-image" /></li>
                 <li>Resolution: Change this query to use a 'prepare'-style, similar to lines 29 & 56.</li>
             </ul>
         </li>
@@ -57,8 +63,11 @@
             <ul>
                 <li>Issue: GPS coords of users are saved to database</li>
                 <li>Location: line 29</li>
-                <li>Severity: Medium</li>
-                <li>Description: This is a privacy issue - user details are sent to the database and saved there, with no encryption.</li>
+                <li>Severity: Severe, because passenger data can currently be downloaded</li>
+                <li>
+                    Description: This is a privacy issue - user details are sent to the database and saved there, with no encryption.
+                    Found this issue when examining the database and during code audit.
+                </li>
                 <li>Proof: <img src="privacy.png" class="privacy-image" /></li>
                 <li>
                     Resolution: Encrypt user details like lat/lng coordinates. Institute a policy of deleting this sensitive 
@@ -68,16 +77,27 @@
         </li>
         <li>
             <ul>
-                <li>Issue: </li>
-                <li>Location: </li>
-                <li>Severity: </li>
-                <li>Description: </li>
-                <li>Proof: </li>
-                <li>Resolution: </li>
+                <li>Issue: Missing Headers</li>
+                <li>Location: All endpoints</li>
+                <li>Severity: Medium, opens the door to possible click-jacking possibility</li>
+                <li>
+                    Description: The header Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options is missing from
+                    the header, which opens the door to possible click-jacking attacks. See: 
+                    https://owasp.org/www-community/attacks/Clickjacking
+                    Found this issue while running the OWASP ZAP tool.
+                </li>
+                <li>Proof: <img src="clickjack.png" class="privacy-image"/></li>
+                <li>Resolution: Add this header to all server responses.</li>
             </ul>
         </li>
     </ul>
     <h1>Conclusion</h1>
+    <p>
+        Several very-high vulnerabilities exist on your site. We recommend you assign a skilled developer to repair these deficiencies
+        before a hacker or other unscrupulous individual discovers them. In particular, the opportunity to download passenger lat/lng 
+        locations is concerning.
+        I would anticipate the price of repairing these vulnerabilities to be &lt; $1000, depending on software developer rates and cost to
+        deploy.
   </body>
     
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Security Assessment</title>
+    <style>
+        .privacy-image {
+            width: 800px;
+        }
+        li {
+            margin-top: 10px;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+    <p>
+        I was hired to provide a security assessment of a back-end written in Node.js. The task is to uncover and report on any
+        security or privacy vulnerabilities that I discover as a result of auditing the source code. The client believes there are at least
+        three potential vectors of attack, although more may be present.
+    </p>
+    <p>
+        OWASP Top Ten vulnerabilities are highest priority, particularly SQL injection vectors.
+    </p>
+    <h1>Methodology</h1>
+    <p> 
+        Prior to investigating code, I used black-box testing to search for likely vulnerabilities.
+    </p>
+    <p>
+        Subsequent to black-box testing, the primary mode of insepction is an in-depth, line-by-line code audit, 
+        backed up by sending curl requests to verify findings. The code was deployed to a Heroku cloud server for testing.
+    </p>
+    <h1>Abstract of Findings</h1>
+    <p>
+
+    </p>
+    <h1>Issues Found</h1>
+    <ul>
+        <li>
+            <ul>
+                <li>Issue: SQL Injection vulnerability</li>
+                <li>Location: line 90</li>
+                <li>Severity: Critical</li>
+                <li>
+                    Description: A SQL injection vulnerability exists in the GET vehicle.json endpoint which would allow
+                    hackers to run their own SQL queries against the database. They could potentially use this to erase or
+                    alter records.
+                </li>
+                <li>Proof: 
+
+                </li>
+                <li>Resolution: Change this query to use a 'prepare'-style, similar to lines 29 & 56.</li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>Issue: GPS coords of users are saved to database</li>
+                <li>Location: line 29</li>
+                <li>Severity: Medium</li>
+                <li>Description: This is a privacy issue - user details are sent to the database and saved there, with no encryption.</li>
+                <li>Proof: <img src="privacy.png" class="privacy-image" /></li>
+                <li>
+                    Resolution: Encrypt user details like lat/lng coordinates. Institute a policy of deleting this sensitive 
+                    data periodically.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>Issue: </li>
+                <li>Location: </li>
+                <li>Severity: </li>
+                <li>Description: </li>
+                <li>Proof: </li>
+                <li>Resolution: </li>
+            </ul>
+        </li>
+    </ul>
+    <h1>Conclusion</h1>
+  </body>
+    
+</html>
